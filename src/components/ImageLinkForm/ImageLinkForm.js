@@ -1,17 +1,25 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {setImageLink, faceDetection} from '../../actions';
 import classes from './ImageLinkForm.module.css';
 
 
 const ImageLinkForm = ({updateImageLink, detectFaces, imgLink, loading}) => {
-    
-    const inputChangeHandler = e => {
-        updateImageLink(e.target.value);    
-    }
 
-    const buttonSubmitHandler = () => {
-        detectFaces(imgLink);
+    const imgLinkInput = useRef(null);
+
+    useEffect(() => {
+      imgLinkInput.current.value = imgLink;
+    });
+
+    const inputChangeHandler = e => {
+        updateImageLink(imgLinkInput.current.value);    
+    }
+    
+    //Made async just to avoid the API request might pick the state before it got updated
+    const buttonSubmitHandler = async () => {
+        await updateImageLink(imgLinkInput.current.value); // update the image link state, then...
+        detectFaces(imgLink); // detect faces
         document.querySelector('#image').scrollIntoView();
     }
 
@@ -24,7 +32,7 @@ const ImageLinkForm = ({updateImageLink, detectFaces, imgLink, loading}) => {
                <div className={classes.form}>
                    <div className="field has-addons">
                         <div className="control" style={{width:"100%"}}>
-                            <input className="input" type="text" placeholder="Enter an image link here..." onChange={inputChangeHandler} value={imgLink} disabled={loading}/>
+                            <input ref={imgLinkInput} className="input" type="text" placeholder="Enter an image link here..." onChange={inputChangeHandler} value={imgLink} disabled={loading}/>
                         </div>
                         <div className="control">
                             <button className="button is-info" onClick={buttonSubmitHandler}>
