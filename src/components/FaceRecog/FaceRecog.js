@@ -39,6 +39,7 @@ const createBox = (coord) => {
         width: `${width}px`
     }
 }
+
 const FaceRecog = ({ imgLink, boxes, loading }) => {
 
     let content = [];
@@ -64,7 +65,6 @@ const FaceRecog = ({ imgLink, boxes, loading }) => {
             <div className="container">
                 <div className={`${classes.imgContainer} has-text-centered`}>
                     {content}
-
                 </div>
             </div>
         </div>

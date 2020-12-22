@@ -6,8 +6,8 @@ const app = new Clarifai.App({
   apiKey: API_KEY // Use your own api key instead that you can find on your Clarifia account.
 });
 
-export const loadImage = imgLink => ({
-  type: actions.LOAD_IMAGE,
+export const setImageLink = imgLink => ({
+  type: actions.SET_IMAGE_LINK,
   payload: {
     imgLink: imgLink
   }

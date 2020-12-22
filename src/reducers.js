@@ -8,7 +8,7 @@ const initialState = {
 
 export const faceDetection = (state = initialState, action={}) => {
     switch (action.type) {
-        case actions.LOAD_IMAGE:
+        case actions.SET_IMAGE_LINK:
             return {...state, imgLink: action.payload.imgLink, boxes:[]} ; 
         case actions.FACE_DETECTION_PENDING:
             return {...state, loading: true} ; 

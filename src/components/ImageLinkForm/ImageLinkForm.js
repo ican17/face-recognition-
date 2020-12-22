@@ -1,19 +1,20 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {loadImage, faceDetection} from '../../actions';
+import {setImageLink, faceDetection} from '../../actions';
 import classes from './ImageLinkForm.module.css';
 
 
 const ImageLinkForm = ({onInputChange, onButtonSubmit, imgLink, loading}) => {
     
     const inputChangeHandler = e => {
-        onInputChange(e.target.value);
+        onInputChange(e.target.value);    
     }
 
     const buttonSubmitHandler = () => {
         onButtonSubmit(imgLink);
         document.querySelector('#image').scrollIntoView();
     }
+
     return (
         <div className="section">
             <div className="container">
@@ -46,7 +47,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onInputChange : imgLink => dispatch(loadImage(imgLink)),
+        onInputChange : imgLink => dispatch(setImageLink(imgLink)),
         onButtonSubmit : imgLink => dispatch(faceDetection(imgLink))
     }
 }
