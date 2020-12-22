@@ -4,14 +4,14 @@ import {setImageLink, faceDetection} from '../../actions';
 import classes from './ImageLinkForm.module.css';
 
 
-const ImageLinkForm = ({onInputChange, onButtonSubmit, imgLink, loading}) => {
+const ImageLinkForm = ({updateImageLink, detectFaces, imgLink, loading}) => {
     
     const inputChangeHandler = e => {
-        onInputChange(e.target.value);    
+        updateImageLink(e.target.value);    
     }
 
     const buttonSubmitHandler = () => {
-        onButtonSubmit(imgLink);
+        detectFaces(imgLink);
         document.querySelector('#image').scrollIntoView();
     }
 
@@ -47,8 +47,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onInputChange : imgLink => dispatch(setImageLink(imgLink)),
-        onButtonSubmit : imgLink => dispatch(faceDetection(imgLink))
+        updateImageLink : imgLink => dispatch(setImageLink(imgLink)),
+        detectFaces : imgLink => dispatch(faceDetection(imgLink))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ImageLinkForm);
